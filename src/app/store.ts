@@ -1,9 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit'
-import postReducer from './postSlice'
+import todoReducer from '../Components/Post/todoSlice.ts'
 
 export const store = configureStore({
     reducer: {
-        posts : postReducer()
+        posts : todoReducer,
     }
 })
 

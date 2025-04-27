@@ -1,14 +1,32 @@
-
-// import {Button} from './Button/Button.tsx'
 import arrowDown from '../assets/arrow_down.png'
-export type Note = {
-    name: string,
-    description?: string,
-    completed?: boolean
-}
+import {useDispatch, useSelector} from "react-redux";
+import {useState} from "react";
+import {addTodo} from "./Post/todoSlice.ts";
+import {createId} from "../utils/createId.ts";
+import {RootState} from "../app/store.ts";
+import {Post} from "./Post/Post.tsx";
 
 export const MainPage = () => {
 
+    const dispatch = useDispatch();
+    const [name, setName] = useState<string>('');
+
+    const handleAdd = () => {
+        if (name.trim()) {
+            dispatch(addTodo({
+                id: createId(),
+                createdAt: new Date(),
+                name: name,
+                soon: false,
+                done: false
+            }))
+        }
+
+        setName('')
+
+    }
+
+    const todos = useSelector((state: RootState)=> state.posts.todos)
     return (
         <>
             <div className="my-20 mx-0">
@@ -18,21 +36,18 @@ export const MainPage = () => {
                     </button>
                     <input
                         placeholder="Write your to-do here"
-                        className="border px-4 py-2 rounded-xl bg-pink-100 border-none hover:border-none"
+                        className="w-200 border px-4 py-2 rounded-xl bg-pink-100 border-none hover:border-none"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
+                    <button className="mx-10 bg-yellow-300 w-35 h-10 rounded-2xl" onClick={() => handleAdd()}>Создать</button>
                 </div>
 
-                <div className="flex flex-row justify-center gap-10 ">
-                    <button className="bg-yellow-300 w-35 h-10 rounded-2xl">Создать</button>
-                    <button className="bg-green-300 w-35 h-10 rounded-2xl">Редактировать</button>
-                    <button className="bg-red-300 w-35 h-10 rounded-2xl">Удалить</button>
-                </div>
+                <div className="flex flex-col items-center ">
 
-                <div className="flex">
-
-
-
-
+                    {todos.map(todo => (
+                        <Post key={todo.id} post={todo}/>
+                    ))}
                 </div>
             </div>
         </>
