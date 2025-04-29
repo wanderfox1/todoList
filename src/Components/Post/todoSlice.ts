@@ -25,6 +25,12 @@ const todoSlice = createSlice({
                 todo.done = !todo.done;
             }
         },
+        toggleSoon: (state, action: PayloadAction<Pick<Post, 'id' | 'soon'>>) => {
+            const todo = state.todos.find(todo => todo.id === action.payload.id)
+            if (todo) {
+                todo.soon = !todo.soon
+            }
+        },
         // filterDones : (state) => {
         //
         // }
@@ -32,5 +38,5 @@ const todoSlice = createSlice({
     },
 })
 
-export const {addTodo, removeTodo, toggleComplete} = todoSlice.actions;
+export const {addTodo, removeTodo, toggleComplete, toggleSoon} = todoSlice.actions;
 export default todoSlice.reducer;

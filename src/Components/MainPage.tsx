@@ -23,8 +23,8 @@ export const MainPage = () => {
         }
 
         setName('')
-
     }
+
 
     const todos = useSelector((state: RootState)=> state.posts.todos)
     return (
@@ -43,7 +43,7 @@ export const MainPage = () => {
                     <button className="mx-10 bg-yellow-300 w-35 h-10 rounded-2xl" onClick={() => handleAdd()}>Создать</button>
                 </div>
 
-                <div className="flex flex-col items-center ">
+                <div className="w-[800px] mx-auto flex flex-col items-center">
 
                     {todos.map(todo => (
                         <Post key={todo.id} post={todo}/>
