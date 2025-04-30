@@ -2,11 +2,13 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Post} from './post.types.ts'
 
 interface todoSlice {
-    todos: Post[];
+    todos: Post[],
+    filter: 'all' | 'soon' | 'done' // union type
 }
 
 const initialState : todoSlice = {
     todos: [],
+    filter: 'all'
 }
 
 const todoSlice = createSlice({
@@ -31,12 +33,12 @@ const todoSlice = createSlice({
                 todo.soon = !todo.soon
             }
         },
-        // filterDones : (state) => {
-        //
-        // }
+        setFilter: (state, action: PayloadAction<'all' | 'soon' | 'done'>) => {
+            state.filter = action.payload
+        },
 
     },
 })
 
-export const {addTodo, removeTodo, toggleComplete, toggleSoon} = todoSlice.actions;
+export const {addTodo, removeTodo, toggleComplete, toggleSoon, setFilter} = todoSlice.actions;
 export default todoSlice.reducer;
