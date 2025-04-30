@@ -5,9 +5,11 @@ import {addTodo, setFilter} from "./Post/todoSlice.ts";
 import {createId} from "../utils/createId.ts";
 import {RootState} from "../app/store.ts";
 import {Post} from "./Post/Post.tsx";
-import {Root} from "react-dom/client";
+import {useTranslation} from "react-i18next";
+
 
 export const MainPage = () => {
+    const {t} = useTranslation()
 
     const dispatch = useDispatch();
     const [name, setName] = useState<string>('');
@@ -53,12 +55,12 @@ export const MainPage = () => {
                         <img src={arrowDown} className="w-4 h-4" alt="Arrow down"/>
                     </button>
                     <input
-                        placeholder="Write your to-do here"
+                        placeholder={t("Write here")}
                         className="w-200 border px-4 py-2 rounded-xl bg-pink-100 border-none hover:border-none"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <button className="mx-10 bg-yellow-300 w-35 h-10 rounded-2xl" onClick={() => handleAdd()}>Создать</button>
+                    <button className="mx-10 bg-yellow-300 w-35 h-10 rounded-2xl" onClick={() => handleAdd()}>{t("Create")}</button>
                 </div>
 
                 <div className="w-[800px] mx-auto flex flex-col items-center">
@@ -69,9 +71,21 @@ export const MainPage = () => {
                 </div>
 
                 <div className="w-[600px]  flex justify-between items-center mx-auto gap-5 my-5">
-                    <button onClick={() => dispatch(setFilter('all'))} className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">All</button>
-                    <button onClick={() => dispatch(setFilter('soon'))} className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">Soon</button>
-                    <button onClick={() => dispatch(setFilter('done'))} className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">Completed</button>
+                    <button onClick={() => dispatch(setFilter('all'))}
+                            className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">{t("All")}
+                    </button>
+                    <button onClick={() => dispatch(setFilter('soon'))}
+                            className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">{t("Soon")}
+                    </button>
+                    <button onClick={() => dispatch(setFilter('done'))}
+                            className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">{t("Completed")}
+                    </button>
+
+                    <button onClick={() => dispatch(setFilter('done'))}
+                            className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">
+                    </button>
+
+
                 </div>
             </div>
         </>

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import {Provider} from 'react-redux'
 import {store} from './app/store.ts'
+import './i18next.ts';
 
 createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
