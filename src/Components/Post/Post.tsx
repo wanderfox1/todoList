@@ -50,6 +50,11 @@ export const Post = ({post}: PostProps) => {
                          src={Delete} alt="Статус"/>
                 </button>
 
+                {/*<button>*/}
+                {/*    <img className="w-7 h-5 cursor-pointer hover:scale-110 transition-transform"*/}
+                {/*        src={Edit} alt="Редактировать"*/}
+                {/*    />*/}
+                {/*</button>*/}
             </div>
         </>
     )

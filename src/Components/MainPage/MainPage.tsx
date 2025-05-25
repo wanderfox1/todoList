@@ -80,7 +80,7 @@ export const MainPage = () => {
 
                     <button onClick={() => dispatch(clearAll())}
                             className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">
-                        Clear items
+                        {t("Clear items")}
                     </button>
                 </div>
             </div>
