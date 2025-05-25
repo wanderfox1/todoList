@@ -33,6 +33,9 @@ const todoSlice = createSlice({
                 todo.soon = !todo.soon
             }
         },
+        clearAll: (state) => {
+            state.todos = []
+        },
         setFilter: (state, action: PayloadAction<'all' | 'soon' | 'done'>) => {
             state.filter = action.payload
         },
@@ -40,5 +43,5 @@ const todoSlice = createSlice({
     },
 })
 
-export const {addTodo, removeTodo, toggleComplete, toggleSoon, setFilter} = todoSlice.actions;
+export const {addTodo, removeTodo, toggleComplete, toggleSoon, setFilter, clearAll} = todoSlice.actions;
 export default todoSlice.reducer;

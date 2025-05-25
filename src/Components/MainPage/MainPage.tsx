@@ -1,10 +1,10 @@
-import arrowDown from '../assets/arrow_down.png'
+import arrowDown from '../../assets/arrow_down.png'
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
-import {addTodo, setFilter} from "./Post/todoSlice.ts";
-import {createId} from "../utils/createId.ts";
-import {RootState} from "../app/store.ts";
-import {Post} from "./Post/Post.tsx";
+import {addTodo, clearAll, setFilter} from "../Post/todoSlice.ts";
+import {createId} from "../../utils/createId.ts";
+import {RootState} from "../../app/store.ts";
+import {Post} from "../Post/Post.tsx";
 import {useTranslation} from "react-i18next";
 
 
@@ -14,8 +14,8 @@ export const MainPage = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState<string>('');
 
-    const handleAdd = () => {
-        if (name.trim()) {
+    const handleAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && name.trim()) {
             dispatch(addTodo({
                 id: createId(),
                 createdAt: new Date(),
@@ -27,8 +27,6 @@ export const MainPage = () => {
 
         setName('')
     }
-
-
 
     const todos = useSelector((state: RootState)=> state.posts.todos)
     const filter = useSelector((state: RootState) => state.posts.filter)
@@ -45,8 +43,7 @@ export const MainPage = () => {
         }
         return false
     })
-
-
+    
     return (
         <>
             <div className="my-20 mx-0">
@@ -59,8 +56,8 @@ export const MainPage = () => {
                         className="w-200 border px-4 py-2 rounded-xl bg-pink-100 border-none hover:border-none"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        onKeyDown={(e) => handleAdd(e)}
                     />
-                    <button className="mx-10 bg-yellow-300 w-35 h-10 rounded-2xl" onClick={() => handleAdd()}>{t("Create")}</button>
                 </div>
 
                 <div className="w-[800px] mx-auto flex flex-col items-center">
@@ -81,11 +78,10 @@ export const MainPage = () => {
                             className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">{t("Completed")}
                     </button>
 
-                    <button onClick={() => dispatch(setFilter('done'))}
+                    <button onClick={() => dispatch(clearAll())}
                             className="border-gray-200 bg-orange-300 w-35 h-10 rounded-2xl">
+                        Clear items
                     </button>
-
-
                 </div>
             </div>
         </>
