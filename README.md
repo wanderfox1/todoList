@@ -32,5 +32,9 @@ This is a simple & functional to-do list built with **React**, **TypeScript**, *
 ## 📦 Installation
 
 ```bash
-npm install
-npm run dev
+npm install && npm run dev
+
+## 📦 Testing
+```bash
+npm run test
+![image](https://github.com/user-attachments/assets/8920dce8-96d2-4bc5-98c6-eb5e295cfba6)
